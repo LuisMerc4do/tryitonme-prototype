@@ -8,7 +8,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TryOnModal } from '@/components/try-on-modal';
 import { cacheStorage } from '@/lib/cache-storage';
-import { mockProducts } from '@/lib/mock-data';
 import { WidgetSettings } from '@/lib/types';
 import { getButtonStyleClasses } from '@/lib/widget-styles';
 

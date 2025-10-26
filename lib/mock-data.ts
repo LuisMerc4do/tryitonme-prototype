@@ -6,7 +6,7 @@ export const mockProducts: Product[] = [
     id: '1',
     title: 'Classic Denim Jacket',
     price: 89.99,
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80',
+    image: '/tshirt-test.webp',
     type: 'jacket',
     enabled: true,
     variants: [
@@ -14,25 +14,19 @@ export const mockProducts: Product[] = [
         id: '1-1',
         title: 'Blue / S',
         price: 89.99,
-        image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80',
+        image: '/tshirt-test.webp',
       },
       {
         id: '1-2',
         title: 'Blue / M',
         price: 89.99,
-        image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80',
+        image: '/tshirt-test2.webp',
       },
       {
         id: '1-3',
         title: 'Black / M',
         price: 94.99,
-        image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&q=80',
-      },
-      {
-        id: '1-4',
-        title: 'Black / L',
-        price: 94.99,
-        image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&q=80',
+        image: '/tshirt-test3.webp',
       },
     ],
   },
@@ -106,7 +100,7 @@ export const mockAnalytics: AnalyticsData = {
   topProducts: [
     {
       id: '1',
-      name: 'Classic Denim Jacket',
+      name: 'WhiteFox Tshirt',
       tryOns: 456,
       successRate: 96,
     },
