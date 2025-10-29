@@ -72,9 +72,9 @@ export const cacheStorage = {
 
     try {
       const results = JSON.parse(stored);
-      // Filter out results older than 10 hours
-      const tenHoursAgo = Date.now() - (10 * 60 * 60 * 1000);
-      return results.filter((r: any) => r.timestamp > tenHoursAgo);
+      // Filter out results older than 3 hours
+      const threeHoursAgo = Date.now() - (3 * 60 * 60 * 1000);
+      return results.filter((r: any) => r.timestamp > threeHoursAgo);
     } catch {
       return [];
     }

@@ -39,6 +39,14 @@ export function TryOnModal({ open, onClose, productTitle, productType, variants 
   const [error, setError] = useState<string>('');
   const [loadingMessage, setLoadingMessage] = useState(loadingMessages[0]);
   const [fullscreenImage, setFullscreenImage] = useState<string>('');
+  const [cachedResults, setCachedResults] = useState<any[]>([]);
+
+  // Load cached results when modal opens
+  useEffect(() => {
+    if (open) {
+      setCachedResults(cacheStorage.getCachedResults());
+    }
+  }, [open]);
 
   // Rotate loading messages
   useEffect(() => {
@@ -125,6 +133,9 @@ export function TryOnModal({ open, onClose, productTitle, productType, variants 
         variantTitle: selectedVariant.title,
         productTitle,
       });
+
+      // Refresh cached results
+      setCachedResults(cacheStorage.getCachedResults());
 
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -254,6 +265,41 @@ export function TryOnModal({ open, onClose, productTitle, productType, variants 
                         className="hidden"
                       />
                     </label>
+
+                    {/* Recent Try-Ons Section */}
+                    {cachedResults.length > 0 && (
+                      <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-4">
+                        <h4 className="text-sm font-semibold text-indigo-900 mb-3 flex items-center gap-2">
+                          <Sparkles className="w-4 h-4" />
+                          Recent Try-Ons (Last 3 Hours)
+                        </h4>
+                        <div className="grid grid-cols-3 gap-2">
+                          {cachedResults.slice(0, 6).map((result, index) => (
+                            <button
+                              key={index}
+                              onClick={() => setFullscreenImage(result.resultImageUrl)}
+                              className="relative group rounded-lg overflow-hidden bg-white border-2 border-transparent hover:border-indigo-400 transition aspect-square"
+                            >
+                              <Image
+                                src={result.resultImageUrl}
+                                alt={result.variantTitle || 'Try-on result'}
+                                fill
+                                className="object-cover"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
+                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 opacity-0 group-hover:opacity-100 transition">
+                                <p className="text-xs text-white font-medium truncate">
+                                  {result.variantTitle}
+                                </p>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                        <p className="text-xs text-indigo-700 mt-2 italic">
+                          Click any image to view full size
+                        </p>
+                      </div>
+                    )}
 
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                       <h4 className="text-sm font-medium text-blue-900 mb-2">
